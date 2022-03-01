@@ -6,7 +6,7 @@ import seaborn as sns
 import mca
 from adjustText import adjust_text
 ##
-st.title("Data to Pairplot APP")
+st.title("CrossTable Analysis APP")
 
 ## Data
 st.subheader("Data Selection")
@@ -14,7 +14,7 @@ uploaded_file = st.file_uploader(
     label="Upload an excel file"
 )
 if uploaded_file is not None:
-    df = pd.read_excel(uploaded_file)
+    df = pd.read_excel(uploaded_file) #load first sheet
     #
     # fpath = "data/BrandValue.xlsx"
     # df = pd.read_excel(fpath)
@@ -36,7 +36,7 @@ if uploaded_file is not None:
     texts = [plt.text(dfp.x[i], dfp.y[i], dfp.label[i], ha='center', va='center') for i in range(len(dfp))]
     adjust_text(texts)
     # plt.show()
-    st.pyplot(fig)
+    st.pyplot(plt)
 
     # xy coordinate table
     st.subheader("XY coordinates of Mapping")
@@ -57,26 +57,6 @@ if uploaded_file is not None:
         mime='text/csv',
     )
 
-
-    # st.write(type(uploaded_file))
-    st.subheader("Uploaded Data")
-    st.write(df)
-    st.write(f"Columns : {df.columns.values}")
-
-    ### side bar
-    option = st.sidebar.multiselect(
-        label = 'Select columns for correlation plot.',
-        options=df.columns.values.tolist(),
-        default=df.columns.values[:4]
-    )
-
-    # plot
-    st.subheader('Pairplot (Matrix of Correlation plot)')
-    st.write("Select columns at side bar.")
-    st.write('Current selections :', option)
-
-    fig = sns.pairplot(data=df, vars=option, diag_kind="kde")
-    st.pyplot(fig)
 
 
 

@@ -1,7 +1,8 @@
-streamlit
-pandas
 numpy
-seaborn
+pandas
+openpyxl
 mca
 matplotlib
 adjusttext
+seaborn
+streamlit
